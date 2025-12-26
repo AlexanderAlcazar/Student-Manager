@@ -13,7 +13,6 @@ This repository contains a comprehensive student management system project, impl
 - [Getting Started](#getting-started)
 - [Educational Value](#educational-value)
 - [Acknowledgments](#acknowledgments)
-- [License](#license)
 
 ---
 
@@ -99,12 +98,6 @@ This project demonstrates core concepts in:
 
 - Special thanks to the group of students who contributed their time and expertise.
 - Project was completed as part of the CS56 course curriculum.
-
----
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
