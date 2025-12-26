@@ -1,6 +1,21 @@
 # Student-Manager
 
+![Demo](https://img.shields.io/badge/Status-Active-brightgreen) ![Java](https://img.shields.io/badge/Java-8+-blue)
+
 This repository contains a comprehensive student management system project, implemented entirely from scratch by Alexander Alcazar with the help of a group of students.
+
+---
+
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Main Features](#main-features)
+- [Technical Architecture](#technical-architecture)
+- [Getting Started](#getting-started)
+- [Educational Value](#educational-value)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
+
+---
 
 ## Project Overview
 
@@ -10,10 +25,12 @@ The project is a full-stack, Java-based student management platform built as an 
 - **Persistent Database Layer:** Student information is stored and retrieved from files, with custom logic for serialization and deserialization.
 - **JavaFX User Interface:** A graphical frontend for administration, data entry, and user operations.
 
+---
+
 ## Main Features
 
 - **User Authentication:** Supports login for both students and administrators, each with distinct verification logic.
-- **Student Management:** 
+- **Student Management:**
   - Add new students with personal details.
   - Remove students by ID.
   - List all students in the database.
@@ -22,26 +39,30 @@ The project is a full-stack, Java-based student management platform built as an 
 - **Data Persistence:** All data is loaded from and saved to files, ensuring information persists between server restarts.
 - **Client-Server Communication:** Uses a custom protocol with line-based commands parsed and routed on the server.
 
+---
+
 ## Technical Architecture
 
-- **Server:**  
+- **Server:**
   - Listens for client connections and processes commands such as `login`, `add`, `remove`, `list`, and `info`.
   - Implements logic for verifying credentials, handling concurrent operations, and managing state changes.
   - Built to run on port 5000 by default.
 
-- **Database:**  
+- **Database:**
   - Manages a collection of `Student` objects with CRUD operations.
   - Reads from and writes to a flat file format for persistence.
   - Provides methods for listing, retrieving, and verifying students.
 
-- **JavaFX GUI:**  
+- **JavaFX GUI:**
   - Controls window transitions and user interactions.
   - Presents forms and lists for student data management.
   - Handles navigation between administrative and user views.
 
-- **Model:**  
+- **Model:**
   - `Person` interface defines the contract for user information.
   - `Student` class implements `Person` and encapsulates all relevant fields (name, ID, contact info, etc.).
+
+---
 
 ## Getting Started
 
@@ -60,6 +81,8 @@ The project is a full-stack, Java-based student management platform built as an 
    - Connect to the server as a student or admin.
    - Use the GUI to add, remove, or view students.
 
+---
+
 ## Educational Value
 
 This project demonstrates core concepts in:
@@ -70,14 +93,19 @@ This project demonstrates core concepts in:
 - Object-oriented principles (interfaces, encapsulation, etc.)
 - Group collaboration and code from scratch
 
+---
+
 ## Acknowledgments
 
 - Special thanks to the group of students who contributed their time and expertise.
 - Project was completed as part of the CS56 course curriculum.
 
+---
+
 ## License
 
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
+
 *Built from scratch for educational purposes—no external frameworks or codebases used.*
