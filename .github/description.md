@@ -1,0 +1,1 @@
+A Java-based student management platform featuring custom TCP server, persistent database layer, and JavaFX user interface.
