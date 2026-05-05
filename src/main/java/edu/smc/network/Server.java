@@ -20,6 +20,7 @@ public class Server {
     private static final String FAIL = "false";
     private static final String ADMIN = "admin";
     private static final String STUDENT = "student";
+    
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
@@ -30,26 +31,13 @@ public class Server {
 
 
     /**
-     * Starts the server and processes client requests.
-     * @param port The port number.
-     */
-    public void start(int port) {
-        try {
-            prepareServer(port);
-            processClientRequests();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            stop();
-        }
-    }
-    /**
      * Prepares the server by loading data and creating a server socket.
      * @param port The port number.
      * @throws IOException In case of any IO errors.
      */
     private void prepareServer(int port) throws IOException {
-        data.loadData();
+
+        data.loadData(); //function in database class to load data from file
         serverSocket = new ServerSocket(port);
     }
     /**
@@ -200,10 +188,18 @@ public class Server {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        // Create a new Server instance
+
+        int port = 5000;
         Server server = new Server();
-        // Start the server at port 5000
-        server.start(5000);
+
+        try {
+            server.prepareServer(port);
+            server.processClientRequests();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            server.stop();
+        }
 
     }
 }
