@@ -1,4 +1,4 @@
-package edu.smc.data;
+package edu.smc.base;
 
 import edu.smc.base.Person;
 import edu.smc.base.User;
@@ -195,3 +195,4 @@ public class Student extends User implements Person {
         return Objects.hash(super.hashCode(), firstName, lastName, studentID, major, phoneNumber, address);
     }
 }
+

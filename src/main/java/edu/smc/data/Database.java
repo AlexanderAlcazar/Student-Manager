@@ -1,5 +1,8 @@
 package edu.smc.data;
 
+import edu.smc.base.Student;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -11,15 +14,17 @@ import java.util.Set;
 /**
  * Performs operations for storing and retrieving student information
  */
+@Component
 public class Database {
     private static final String DATA_FILE_NAME = "data.txt";
-    private Set<Student> studentList;
+    private final Set<Student> studentList;
 
     /**
      * Constructor for initial database setup
      */
     public Database() {
         this.studentList = new HashSet<>();
+        loadData();
     }
 
     /**
@@ -32,7 +37,21 @@ public class Database {
      * @return boolean value indicating the success of the operation
      */
     public boolean addStudent(String firstname, String lastname, String phoneNumber, String address, String major) {
-        return studentList.add(new Student(firstname, lastname, generateID(), phoneNumber, address, major));
+        return addStudentRecord(firstname, lastname, phoneNumber, address, major) != null;
+    }
+
+    /**
+     * Adds a new Student to the database and returns the created record.
+     * @param firstname Student's first name
+     * @param lastname Student's last name
+     * @param phoneNumber Student's phone number
+     * @param address Student's address
+     * @param major Student's major
+     * @return the created Student, or null if the student already exists
+     */
+    public Student addStudentRecord(String firstname, String lastname, String phoneNumber, String address, String major) {
+        Student student = new Student(firstname, lastname, generateID(), phoneNumber, address, major);
+        return studentList.add(student) ? student : null;
     }
 
     /**
@@ -68,6 +87,14 @@ public class Database {
             list.append(i);
         }
         return list.toString();
+    }
+
+    /**
+     * Returns a snapshot of all students currently stored in memory.
+     * @return copy of the student set
+     */
+    public Set<Student> getStudents() {
+        return new HashSet<>(studentList);
     }
 
     /**

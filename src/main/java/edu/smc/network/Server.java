@@ -1,8 +1,7 @@
 package edu.smc.network;
 
-import edu.smc.data.Administrator;
 import edu.smc.data.Database;
-import edu.smc.data.Student;
+import edu.smc.base.Student;
 
 import java.io.*;
 import java.net.*;
@@ -18,7 +17,6 @@ public class Server {
     private static final String CMD_LIST = "list";
     private static final String SUCCESS = "true";
     private static final String FAIL = "false";
-    private static final String ADMIN = "admin";
     private static final String STUDENT = "student";
     
     private ServerSocket serverSocket;
@@ -27,7 +25,6 @@ public class Server {
     private BufferedReader in;
 
     private Database data = new Database();
-    private Administrator admin = new Administrator("admin", "admin");
 
 
     /**
@@ -96,18 +93,11 @@ public class Server {
      * @param parse the parsed command from the client
      */
     private void processLoginCommand(String[] parse){
-        if(parse[3].equals(ADMIN)) {
-            if(admin.verify(parse[1], parse[2])){
-                out.println(SUCCESS);
-            } else{
-                out.println(FAIL);
-            }
+        // All authentication is validated against the Database for now.
+        if (data.verify(parse[1], parse[2])) {
+            out.println(SUCCESS);
         } else {
-            if (data.verify(parse[1], parse[2])) {
-                out.println(SUCCESS);
-            } else{
-                out.println(FAIL);
-            }
+            out.println(FAIL);
         }
     }
 
