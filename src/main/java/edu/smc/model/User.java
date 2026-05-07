@@ -1,16 +1,21 @@
 // Declaring package of the class
-package edu.smc.base;
+package edu.smc.model;
 
-// Importing required utility class
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 /**
  * Declaring an abstract User class which represents a general user with a username and password.
  */
+@MappedSuperclass
 public abstract class User {
 
     // Declaring instance variables for username and password
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(nullable = false)
     private String password;
 
     /**
@@ -74,7 +79,7 @@ public abstract class User {
      * @return true if the given username and password match the user's username and password, false otherwise.
      */
     public boolean verify(String username, String password) {
-        return this.username.equals(username) && this.password.equals(password);
+        return Objects.equals(this.username, username) && Objects.equals(this.password, password);
     }
 
 
@@ -89,8 +94,8 @@ public abstract class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return username.equals(user.username) &&
-                password.equals(user.password);
+        return Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password);
     }
 
     /**

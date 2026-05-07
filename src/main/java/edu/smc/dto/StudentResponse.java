@@ -1,6 +1,6 @@
 package edu.smc.dto;
 
-import edu.smc.base.Student;
+import edu.smc.model.Student;
 
 public class StudentResponse {
     private final String firstName;

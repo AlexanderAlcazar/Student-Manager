@@ -1,6 +1,6 @@
 package edu.smc.service;
 
-import edu.smc.base.Student;
+import edu.smc.model.Student;
 import edu.smc.data.Database;
 import edu.smc.dto.StudentCreateRequest;
 import edu.smc.dto.StudentResponse;
@@ -18,14 +18,14 @@ public class StudentService {
     public StudentService(Database database) {
         this.database = database;
     }
-
+    //reference getStudents function in the Database class and fromStudent function in the StudentResponse class
     public List<StudentResponse> listStudents() {
         return database.getStudents().stream()
                 .sorted((left, right) -> Integer.compare(left.getStudentID(), right.getStudentID()))
                 .map(StudentResponse::fromStudent)
                 .collect(Collectors.toList());
     }
-
+    // reference getStudent function in the Database class and fromStudent function in the StudentResponse class
     public Optional<StudentResponse> getStudent(int studentId) {
         Student student = database.getStudent(studentId);
         if (student == null) {
@@ -35,7 +35,7 @@ public class StudentService {
     }
 
     public StudentResponse addStudent(StudentCreateRequest request) {
-        Student student = database.addStudentRecord(
+        Student student = database.addStudent(
                 request.getFirstName(),
                 request.getLastName(),
                 request.getPhoneNumber(),
@@ -47,16 +47,10 @@ public class StudentService {
             throw new IllegalStateException("Student already exists");
         }
 
-        database.saveData();
         return StudentResponse.fromStudent(student);
     }
 
     public boolean removeStudent(int studentId) {
-        boolean removed = database.removeStudent(studentId);
-        if (removed) {
-            database.saveData();
-        }
-        return removed;
+        return database.removeStudent(studentId);
     }
 }
-

@@ -1,22 +1,43 @@
-package edu.smc.base;
+package edu.smc.model;
 
-import edu.smc.base.Person;
-import edu.smc.base.User;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
  * Represents a Student, which is a specific type of User.
  * Implements the Person interface for personal information.
  */
+@Entity
+@Table(name = "students")
 public class Student extends User implements Person {
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
+
+    @Id
+    @Column(nullable = false, updatable = false)
     private int studentID;
+
+    @Column(nullable = false)
     private String major;
+
+    @Column(nullable = false)
     private String phoneNumber;
+
+    @Column(nullable = false)
     private String address;
     private static final String DEFAULT_PASSWORD = "student";
+
+    /**
+     * JPA constructor.
+     */
+    protected Student() {
+    }
 
     /**
      * Constructs a new Student with the specified details.
@@ -68,7 +89,7 @@ public class Student extends User implements Person {
      * @return The generated email address.
      */
     private String generateStudentEmail(int studentID) {
-        return Integer.toString(studentID) + "@smc.edu";
+        return studentID + "@smc.edu";
     }
 
     /**
@@ -181,18 +202,11 @@ public class Student extends User implements Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Student student)) return false;
-        if (!super.equals(o)) return false;
-        return studentID == student.studentID &&
-                Objects.equals(firstName, student.firstName) &&
-                Objects.equals(lastName, student.lastName) &&
-                Objects.equals(major, student.major) &&
-                Objects.equals(phoneNumber, student.phoneNumber) &&
-                Objects.equals(address, student.address);
+        return studentID == student.studentID;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, studentID, major, phoneNumber, address);
+        return Objects.hash(studentID);
     }
 }
-

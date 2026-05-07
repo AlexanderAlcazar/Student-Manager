@@ -1,8 +1,8 @@
 # Student-Manager
 
-![Demo](https://img.shields.io/badge/Status-Active-brightgreen) ![Java](https://img.shields.io/badge/Java-8+-blue)
+![Demo](https://img.shields.io/badge/Status-Active-brightgreen) ![Java](https://img.shields.io/badge/Java-20+-blue)
 
-This repository contains a comprehensive student management system project, implemented entirely from scratch by Alexander Alcazar with the help of a group of students.
+This repository contains a student management system built with Spring Boot, Spring Data JPA, and an embedded H2 database.
 
 ---
 
@@ -18,48 +18,36 @@ This repository contains a comprehensive student management system project, impl
 
 ## Project Overview
 
-The project is a full-stack, Java-based student management platform built as an educational exercise. It features:
+The project is a Java-based student management platform built as an educational exercise. It features:
 
-- **Custom TCP Server:** Handles multiple client connections and manages all student-related operations.
-- **Persistent Database Layer:** Student information is stored and retrieved from files, with custom logic for serialization and deserialization.
-- **JavaFX User Interface:** A graphical frontend for administration, data entry, and user operations.
+- **Spring Boot REST Backend:** Exposes HTTP endpoints for login and student management.
+- **Real Database Persistence:** Student information is stored in H2 through Spring Data JPA.
+- **DTO-based API:** Requests and responses use JSON-friendly data transfer objects.
 
 ---
 
 ## Main Features
 
-- **User Authentication:** Supports login for both students and administrators, each with distinct verification logic.
+- **User Authentication:** Supports login for students using the database-backed authentication flow.
 - **Student Management:**
   - Add new students with personal details.
   - Remove students by ID.
   - List all students in the database.
   - Retrieve detailed information for a specific student.
-- **Admin Features:** Additional administrative operations accessible via admin login.
-- **Data Persistence:** All data is loaded from and saved to files, ensuring information persists between server restarts.
-- **Client-Server Communication:** Uses a custom protocol with line-based commands parsed and routed on the server.
+- **Data Persistence:** All student records are stored in H2 and loaded automatically through JPA.
+- **REST Communication:** Uses standard HTTP endpoints instead of a custom socket protocol.
 
 ---
 
 ## Technical Architecture
 
-- **Server:**
-  - Listens for client connections and processes commands such as `login`, `add`, `remove`, `list`, and `info`.
-  - Implements logic for verifying credentials, handling concurrent operations, and managing state changes.
-  - Built to run on port 5000 by default.
-
 - **Database:**
-  - Manages a collection of `Student` objects with CRUD operations.
-  - Reads from and writes to a flat file format for persistence.
-  - Provides methods for listing, retrieving, and verifying students.
-
-- **JavaFX GUI:**
-  - Controls window transitions and user interactions.
-  - Presents forms and lists for student data management.
-  - Handles navigation between administrative and user views.
+  - Wraps Spring Data JPA and exposes CRUD-style operations for students.
+  - Uses H2 as the runtime database.
 
 - **Model:**
-  - `Person` interface defines the contract for user information.
-  - `Student` class implements `Person` and encapsulates all relevant fields (name, ID, contact info, etc.).
+  - `Person` interface defines the contract for personal information.
+  - `Student` is a JPA entity that stores student records in the database.
 
 ---
 
@@ -72,13 +60,11 @@ The project is a full-stack, Java-based student management platform built as an 
    ```
 
 2. **Build and Run:**
-   - Ensure you have JDK 8+ and JavaFX libraries installed.
-   - Compile the project using your preferred IDE or CLI tools.
-   - Start the server (`Server.java`), then launch the JavaFX client.
+   - Ensure you have a compatible JDK and Maven installed.
+   - Run the Spring Boot application from `StudentManagerApplication`.
 
 3. **Usage:**
-   - Connect to the server as a student or admin.
-   - Use the GUI to add, remove, or view students.
+   - Use the REST API endpoints to add, remove, list, and fetch students.
 
 ---
 
@@ -86,11 +72,10 @@ The project is a full-stack, Java-based student management platform built as an 
 
 This project demonstrates core concepts in:
 
-- Network programming (socket servers)
-- File I/O and persistence
-- JavaFX GUI design
+- Spring Boot and REST APIs
+- Spring Data JPA and database persistence
 - Object-oriented principles (interfaces, encapsulation, etc.)
-- Group collaboration and code from scratch
+- DTO-based API design
 
 ---
 
@@ -101,4 +86,4 @@ This project demonstrates core concepts in:
 
 ---
 
-*Built from scratch for educational purposes—no external frameworks or codebases used.*
+*Built for educational purposes using Spring Boot, Spring Data JPA, and H2.*

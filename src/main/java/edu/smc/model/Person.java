@@ -1,5 +1,5 @@
 // Defines package that this interface belongs to
-package edu.smc.base;
+package edu.smc.model;
 
 /**
  * Defines the Person interface which outlines methods for getting and setting personal information.
